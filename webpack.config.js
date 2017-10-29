@@ -58,7 +58,7 @@ module.exports = (options = {}) => {
         },
         output: {
             path: path.resolve(__dirname,'./dist'),
-            filename: '[name].js',
+            filename: '[name].dev.js',
             library: '[name]'
         },
         plugins: plugins,

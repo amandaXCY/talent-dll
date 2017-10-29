@@ -1,7 +1,7 @@
 {
-  "name": "@talentui/dll-webpack-config",
+  "name": "@amanda/talent-dll",
   "version": "1.0.1",
-  "main": "webpack.config.js",
+  "main": "dist/talent.js",
   "author": {
     "name": "xuchengyun",
     "email": "xuchengyun@beisen.com"
