@@ -33,12 +33,22 @@ module.exports = (options = {}) => {
         //     }
         // }),
         // // new webpack.optimize.ModuleConcatenationPlugin(),
+        new webpack.ProvidePlugin({
+            $: 'jQuery',
+            jQuery:"jQuery",
+            Talent:"Talent",
+            talent:"Talent"
+        }),
         new webpack.DllPlugin({
+            // 指定一个路径作为上下文环境，需要与DllReferencePlugin的context参数保持一致，建议统一设置为项目根目录
             path: 'dist/manifest.json',
             name: '[name]',
-            context: __dirname
+            context: path.resolve(__dirname)
         }),
-        new webpack.IgnorePlugin(/^(underscore)$/)
+        new webpack.IgnorePlugin(/^(underscore)$/),
+
+        
+        
     ];
 
     if (isProduction) {
@@ -54,16 +64,37 @@ module.exports = (options = {}) => {
 
     return {
         entry: {
-            talent:require("./vender-list.js")
+            talentDll:require("./vender-list.js")
         },
         output: {
-            path: path.resolve(__dirname,'./dist'),
+            // 与业务代码共用同一份路径的配置表
+            path:path.resolve(__dirname, './dist'),
             filename: '[name].dev.js',
             library: '[name]'
         },
         plugins: plugins,
         resolve: {
             modules: ['node_modules'],
+            alias:{
+                '$': path.resolve(process.cwd(),'./node_modules/@beisen/jquery'),
+                'jQuery':path.resolve(process.cwd(),'./node_modules/@beisen/jquery'),
+                'talent':path.resolve(process.cwd(),'./node_modules/@beisen/talent-no-require/index.js'),
+                'Talent':path.resolve(process.cwd(),'./node_modules/@beisen/talent-no-require/index.js')
+                
+            },
+        },
+        module:{
+            rules: [{
+                test: /\.js?$/,
+                include: [path.resolve(process.cwd(), "./node_modules/@beisen/jquery/index.js")],
+                use: [{
+                  loader: 'expose-loader',
+                  options: 'jquery'
+                },{
+                  loader: 'expose-loader',
+                  options: '$'
+                }]
+            }]
         },
         devtool: isProduction ? "cheap-source-map" : false
     };

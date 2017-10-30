@@ -1,7 +1,7 @@
 {
   "name": "@amanda/talent-dll",
   "version": "1.0.1",
-  "main": "dist/talent.js",
+  "main": "dist/talent.dev.js",
   "author": {
     "name": "xuchengyun",
     "email": "xuchengyun@beisen.com"
@@ -20,13 +20,16 @@
     "@beisen/json": "^3.5.29",
     "@beisen/lodash": "^2.2.4",
     "@beisen/marionette": "^1.2.2",
-    "@beisen/talent-no-require": "^1.0.3"
+    "@beisen/talent-no-require": "^1.0.3",
+    "expose-loader": "^0.7.3"
   },
   "scripts": {
     "test": "jest",
-    "dll": "webpack --config=webpack.config.js"
+    "dll": "rm -rf ./dist && webpack --config=webpack.config.js"
   },
   "devDependencies": {
+    "expose-loader": "^0.7.3",
+    "react": "^15.6.2",
     "webpack": "^3.8.1"
   }
 }

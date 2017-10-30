@@ -5,4 +5,5 @@ module.exports = [
 	,"@beisen/backbone"
 	,"@beisen/marionette"
 	,"@beisen/talent-no-require"
+	,"react"
 ]
