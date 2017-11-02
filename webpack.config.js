@@ -37,17 +37,18 @@ module.exports = (options = {}) => {
             $: 'jQuery',
             jQuery:"jQuery",
             Talent:"Talent",
-            talent:"Talent"
+            _:"@beisen/lodash"
+
         }),
+        new webpack.IgnorePlugin(/^(underscore)$/),
         new webpack.DllPlugin({
             // 指定一个路径作为上下文环境，需要与DllReferencePlugin的context参数保持一致，建议统一设置为项目根目录
             path: 'dist/manifest.json',
             name: '[name]',
             context: path.resolve(__dirname)
         }),
-        new webpack.IgnorePlugin(/^(underscore)$/),
+       
 
-        
         
     ];
 

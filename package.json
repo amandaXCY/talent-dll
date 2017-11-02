@@ -15,13 +15,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@beisen/backbone": "^1.1.5",
+    "@beisen/backbone": "^1.1.7",
     "@beisen/jquery": "^1.10.5",
     "@beisen/json": "^3.5.29",
-    "@beisen/lodash": "^2.2.4",
+    "@beisen/lodash": "^2.2.5",
     "@beisen/marionette": "^1.2.2",
-    "@beisen/talent-no-require": "^1.0.3",
-    "expose-loader": "^0.7.3"
+    "@beisen/talent-no-require": "^1.0.6"
   },
   "scripts": {
     "test": "jest",
