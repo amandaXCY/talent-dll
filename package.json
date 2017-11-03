@@ -1,6 +1,6 @@
 {
   "name": "@amanda/talent-dll",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "main": "dist/talent.dev.js",
   "author": {
     "name": "xuchengyun",
