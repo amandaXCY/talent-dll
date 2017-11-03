@@ -15,7 +15,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@beisen/backbone": "^1.1.7",
+    "@beisen/backbone": "^1.1.8",
     "@beisen/jquery": "^1.10.5",
     "@beisen/json": "^3.5.29",
     "@beisen/lodash": "^2.2.5",
@@ -27,6 +27,7 @@
     "dll": "rm -rf ./dist && webpack --config=webpack.config.js"
   },
   "devDependencies": {
+    "@beisen/backbone": "^1.1.9",
     "expose-loader": "^0.7.3",
     "react": "^15.6.2",
     "webpack": "^3.8.1"

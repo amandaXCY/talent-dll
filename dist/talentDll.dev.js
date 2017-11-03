@@ -66,9 +66,18 @@ var talentDll =
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/@beisen/backbone/index.js":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./node_modules/@beisen/backbone/index-es6.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__ = __webpack_require__("./node_modules/@beisen/lodash/index-es6.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__beisen_jquery__ = __webpack_require__("./node_modules/@beisen/jquery/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__beisen_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__beisen_jquery__);
+/*
+* author:xuchengyun
+* edited:2017-11-2
+*/
 //     Backbone.js 1.1.0
 
 //     (c) 2010-2011 Jeremy Ashkenas, DocumentCloud Inc.
@@ -77,14 +86,15 @@ var talentDll =
 //     For all details and documentation:
 //     http://backbonejs.org
 
-(function(){
+
+
 
   // Initial Setup
   // -------------
 
   // Save a reference to the global object (`window` in the browser, `exports`
   // on the server).
-  var root = this;
+  var root = window;
 
   // Save the previous value of the `Backbone` variable, so that it can be
   // restored later on, if `noConflict` is used.
@@ -98,23 +108,23 @@ var talentDll =
 
   // The top-level namespace. All public Backbone classes and modules will
   // be attached to this. Exported for both the browser and the server.
-  var Backbone;
-  if (true) {
-    Backbone = exports;
-  } else {
-    Backbone = root.Backbone = {};
-  }
+  // var Backbone;
+  // if (typeof exports !== 'undefined') {
+  //   Backbone = exports;
+  // } else {
+  //   Backbone = root.Backbone = {};
+  // }
 
   // Current version of the library. Keep in sync with `package.json`.
   Backbone.VERSION = '1.1.0';
 
   // Require Underscore, if we're on the server, and it's not already present.
-  var _ = root._;
-  if (!_ && ("function" !== 'undefined')) _ = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"underscore\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+  //if (!_ && (typeof require !== 'undefined')) _ = require('underscore');
 
   // For Backbone's purposes, jQuery, Zepto, Ender, or My Library (kidding) owns
   // the `$` variable.
-  Backbone.$ = root.jQuery || root.Zepto || root.ender || root.$;
+  Backbone.$ = root.jQuery || root.Zepto || root.ender || __WEBPACK_IMPORTED_MODULE_1__beisen_jquery__;
 
   // Runs Backbone.js in *noConflict* mode, returning the `Backbone` variable
   // to its previous owner. Returns a reference to this Backbone object.
@@ -164,7 +174,7 @@ var talentDll =
     once: function(name, callback, context) {
       if (!eventsApi(this, 'once', name, [callback, context]) || !callback) return this;
       var self = this;
-      var once = _.once(function() {
+      var once = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].once(function() {
         self.off(name, once);
         callback.apply(this, arguments);
       });
@@ -183,7 +193,7 @@ var talentDll =
         this._events = {};
         return this;
       }
-      names = name ? [name] : _.keys(this._events);
+      names = name ? [name] : __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].keys(this._events);
       for (i = 0, l = names.length; i < l; i++) {
         name = names[i];
         if (events = this._events[name]) {
@@ -230,7 +240,7 @@ var talentDll =
       for (var id in listeningTo) {
         obj = listeningTo[id];
         obj.off(name, callback, this);
-        if (remove || _.isEmpty(obj._events)) delete this._listeningTo[id];
+        if (remove || __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].isEmpty(obj._events)) delete this._listeningTo[id];
       }
       return this;
     }
@@ -285,10 +295,10 @@ var talentDll =
   // Inversion-of-control versions of `on` and `once`. Tell *this* object to
   // listen to an event in another object ... keeping track of what it's
   // listening to.
-  _.each(listenMethods, function(implementation, method) {
+  __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].each(listenMethods, function(implementation, method) {
     Events[method] = function(obj, name, callback) {
       var listeningTo = this._listeningTo || (this._listeningTo = {});
-      var id = obj._listenId || (obj._listenId = _.uniqueId('l'));
+      var id = obj._listenId || (obj._listenId = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].uniqueId('l'));
       listeningTo[id] = obj;
       if (!callback && typeof name === 'object') callback = this;
       obj[implementation](name, callback, this);
@@ -302,7 +312,7 @@ var talentDll =
 
   // Allow the `Backbone` object to serve as a global event bus, for folks who
   // want global "pubsub" in a convenient place.
-  _.extend(Backbone, Events);
+  __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend(Backbone, Events);
 
   // Backbone.Model
   // --------------
@@ -317,18 +327,18 @@ var talentDll =
   var Model = Backbone.Model = function(attributes, options) {
     var attrs = attributes || {};
     options || (options = {});
-    this.cid = _.uniqueId('c');
+    this.cid = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].uniqueId('c');
     this.attributes = {};
     if (options.collection) this.collection = options.collection;
     if (options.parse) attrs = this.parse(attrs, options) || {};
-    attrs = _.defaults({}, attrs, _.result(this, 'defaults'));
+    attrs = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].defaults({}, attrs, __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].result(this, 'defaults'));
     this.set(attrs, options);
     this.changed = {};
     this.initialize.apply(this, arguments);
   };
 
   // Attach all inheritable methods to the Model prototype.
-  _.extend(Model.prototype, Events, {
+  __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend(Model.prototype, Events, {
 
     // A hash of attributes whose current and previous value differ.
     changed: null,
@@ -346,7 +356,7 @@ var talentDll =
 
     // Return a copy of the model's `attributes` object.
     toJSON: function(options) {
-      return _.clone(this.attributes);
+      return __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].clone(this.attributes);
     },
 
     // Proxy `Backbone.sync` by default -- but override this if you need
@@ -362,7 +372,7 @@ var talentDll =
 
     // Get the HTML-escaped value of an attribute.
     escape: function(attr) {
-      return _.escape(this.get(attr));
+      return __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].escape(this.get(attr));
     },
 
     // Returns `true` if the attribute contains a value that is not null
@@ -399,7 +409,7 @@ var talentDll =
       this._changing  = true;
 
       if (!changing) {
-        this._previousAttributes = _.clone(this.attributes);
+        this._previousAttributes = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].clone(this.attributes);
         this.changed = {};
       }
       current = this.attributes, prev = this._previousAttributes;
@@ -410,8 +420,8 @@ var talentDll =
       // For each `set` attribute, update or delete the current value.
       for (attr in attrs) {
         val = attrs[attr];
-        if (!_.isEqual(current[attr], val)) changes.push(attr);
-        if (!_.isEqual(prev[attr], val)) {
+        if (!__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].isEqual(current[attr], val)) changes.push(attr);
+        if (!__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].isEqual(prev[attr], val)) {
           this.changed[attr] = val;
         } else {
           delete this.changed[attr];
@@ -444,21 +454,21 @@ var talentDll =
     // Remove an attribute from the model, firing `"change"`. `unset` is a noop
     // if the attribute doesn't exist.
     unset: function(attr, options) {
-      return this.set(attr, void 0, _.extend({}, options, {unset: true}));
+      return this.set(attr, void 0, __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend({}, options, {unset: true}));
     },
 
     // Clear all attributes on the model, firing `"change"`.
     clear: function(options) {
       var attrs = {};
       for (var key in this.attributes) attrs[key] = void 0;
-      return this.set(attrs, _.extend({}, options, {unset: true}));
+      return this.set(attrs, __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend({}, options, {unset: true}));
     },
 
     // Determine if the model has changed since the last `"change"` event.
     // If you specify an attribute name, determine if that attribute has changed.
     hasChanged: function(attr) {
-      if (attr == null) return !_.isEmpty(this.changed);
-      return _.has(this.changed, attr);
+      if (attr == null) return !__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].isEmpty(this.changed);
+      return __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].has(this.changed, attr);
     },
 
     // Return an object containing all the attributes that have changed, or
@@ -468,11 +478,11 @@ var talentDll =
     // You can also pass an attributes object to diff against the model,
     // determining if there *would be* a change.
     changedAttributes: function(diff) {
-      if (!diff) return this.hasChanged() ? _.clone(this.changed) : false;
+      if (!diff) return this.hasChanged() ? __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].clone(this.changed) : false;
       var val, changed = false;
       var old = this._changing ? this._previousAttributes : this.attributes;
       for (var attr in diff) {
-        if (_.isEqual(old[attr], (val = diff[attr]))) continue;
+        if (__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].isEqual(old[attr], (val = diff[attr]))) continue;
         (changed || (changed = {}))[attr] = val;
       }
       return changed;
@@ -488,14 +498,14 @@ var talentDll =
     // Get all of the attributes of the model at the time of the previous
     // `"change"` event.
     previousAttributes: function() {
-      return _.clone(this._previousAttributes);
+      return __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].clone(this._previousAttributes);
     },
 
     // Fetch the model from the server. If the server's representation of the
     // model differs from its current attributes, they will be overridden,
     // triggering a `"change"` event.
     fetch: function(options) {
-      options = options ? _.clone(options) : {};
+      options = options ? __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].clone(options) : {};
       if (options.parse === void 0) options.parse = true;
       var model = this;
       var success = options.success;
@@ -522,7 +532,7 @@ var talentDll =
         (attrs = {})[key] = val;
       }
 
-      options = _.extend({validate: true}, options);
+      options = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend({validate: true}, options);
 
       // If we're not waiting and attributes exist, save acts as
       // `set(attr).save(null, opts)` with validation. Otherwise, check if
@@ -535,7 +545,7 @@ var talentDll =
 
       // Set temporary attributes if `{wait: true}`.
       if (attrs && options.wait) {
-        this.attributes = _.extend({}, attributes, attrs);
+        this.attributes = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend({}, attributes, attrs);
       }
 
       // After a successful server-side save, the client is (optionally)
@@ -547,8 +557,8 @@ var talentDll =
         // Ensure attributes are restored during synchronous saves.
         model.attributes = attributes;
         var serverAttrs = model.parse(resp, options);
-        if (options.wait) serverAttrs = _.extend(attrs || {}, serverAttrs);
-        if (_.isObject(serverAttrs) && !model.set(serverAttrs, options)) {
+        if (options.wait) serverAttrs = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend(attrs || {}, serverAttrs);
+        if (__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].isObject(serverAttrs) && !model.set(serverAttrs, options)) {
           return false;
         }
         if (success) success(model, resp, options);
@@ -570,7 +580,7 @@ var talentDll =
     // Optimistically removes the model from its collection, if it has one.
     // If `wait: true` is passed, waits for the server to respond before removal.
     destroy: function(options) {
-      options = options ? _.clone(options) : {};
+      options = options ? __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].clone(options) : {};
       var model = this;
       var success = options.success;
 
@@ -599,7 +609,7 @@ var talentDll =
     // using Backbone's restful methods, override this to change the endpoint
     // that will be called.
     url: function() {
-      var base = _.result(this, 'urlRoot') || _.result(this.collection, 'url') || urlError();
+      var base = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].result(this, 'urlRoot') || __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].result(this.collection, 'url') || urlError();
       if (this.isNew()) return base;
       return base + (base.charAt(base.length - 1) === '/' ? '' : '/') + encodeURIComponent(this.id);
     },
@@ -622,17 +632,17 @@ var talentDll =
 
     // Check if the model is currently in a valid state.
     isValid: function(options) {
-      return this._validate({}, _.extend(options || {}, { validate: true }));
+      return this._validate({}, __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend(options || {}, { validate: true }));
     },
 
     // Run validation against the next complete set of model attributes,
     // returning `true` if all is well. Otherwise, fire an `"invalid"` event.
     _validate: function(attrs, options) {
       if (!options.validate || !this.validate) return true;
-      attrs = _.extend({}, this.attributes, attrs);
+      attrs = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend({}, this.attributes, attrs);
       var error = this.validationError = this.validate(attrs, options) || null;
       if (!error) return true;
-      this.trigger('invalid', this, error, _.extend(options, {validationError: error}));
+      this.trigger('invalid', this, error, __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend(options, {validationError: error}));
       return false;
     }
 
@@ -642,11 +652,11 @@ var talentDll =
   var modelMethods = ['keys', 'values', 'pairs', 'invert', 'pick', 'omit'];
 
   // Mix in each Underscore method as a proxy to `Model#attributes`.
-  _.each(modelMethods, function(method) {
+  __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].each(modelMethods, function(method) {
     Model.prototype[method] = function() {
       var args = slice.call(arguments);
       args.unshift(this.attributes);
-      return _[method].apply(_, args);
+      return __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"][method].apply(__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"], args);
     };
   });
 
@@ -669,7 +679,7 @@ var talentDll =
     if (options.comparator !== void 0) this.comparator = options.comparator;
     this._reset();
     this.initialize.apply(this, arguments);
-    if (models) this.reset(models, _.extend({silent: true}, options));
+    if (models) this.reset(models, __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend({silent: true}, options));
   };
 
   // Default options for `Collection#set`.
@@ -677,7 +687,7 @@ var talentDll =
   var addOptions = {add: true, remove: false};
 
   // Define the Collection's inheritable methods.
-  _.extend(Collection.prototype, Events, {
+  __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend(Collection.prototype, Events, {
 
     // The default model for a collection is just a **Backbone.Model**.
     // This should be overridden in most cases.
@@ -700,13 +710,13 @@ var talentDll =
 
     // Add a model, or list of models to the set.
     add: function(models, options) {
-      return this.set(models, _.extend({merge: false}, options, addOptions));
+      return this.set(models, __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend({merge: false}, options, addOptions));
     },
 
     // Remove a model, or a list of models from the set.
     remove: function(models, options) {
-      var singular = !_.isArray(models);
-      models = singular ? [models] : _.clone(models);
+      var singular = !__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].isArray(models);
+      models = singular ? [models] : __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].clone(models);
       options || (options = {});
       var i, l, index, model;
       for (i = 0, l = models.length; i < l; i++) {
@@ -731,15 +741,15 @@ var talentDll =
     // already exist in the collection, as necessary. Similar to **Model#set**,
     // the core operation for updating the data contained by the collection.
     set: function(models, options) {
-      options = _.defaults({}, options, setOptions);
+      options = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].defaults({}, options, setOptions);
       if (options.parse) models = this.parse(models, options);
-      var singular = !_.isArray(models);
-      models = singular ? (models ? [models] : []) : _.clone(models);
+      var singular = !__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].isArray(models);
+      models = singular ? (models ? [models] : []) : __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].clone(models);
       var i, l, id, model, attrs, existing, sort;
       var at = options.at;
       var targetModel = this.model;
       var sortable = this.comparator && (at == null) && options.sort !== false;
-      var sortAttr = _.isString(this.comparator) ? this.comparator : null;
+      var sortAttr = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].isString(this.comparator) ? this.comparator : null;
       var toAdd = [], toRemove = [], modelMap = {};
       var add = options.add, merge = options.merge, remove = options.remove;
       var order = !sortable && add && remove ? [] : false;
@@ -832,14 +842,14 @@ var talentDll =
       }
       options.previousModels = this.models;
       this._reset();
-      models = this.add(models, _.extend({silent: true}, options));
+      models = this.add(models, __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend({silent: true}, options));
       if (!options.silent) this.trigger('reset', this, options);
       return models;
     },
 
     // Add a model to the end of the collection.
     push: function(model, options) {
-      return this.add(model, _.extend({at: this.length}, options));
+      return this.add(model, __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend({at: this.length}, options));
     },
 
     // Remove a model from the end of the collection.
@@ -851,7 +861,7 @@ var talentDll =
 
     // Add a model to the beginning of the collection.
     unshift: function(model, options) {
-      return this.add(model, _.extend({at: 0}, options));
+      return this.add(model, __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend({at: 0}, options));
     },
 
     // Remove a model from the beginning of the collection.
@@ -880,7 +890,7 @@ var talentDll =
     // Return models with matching attributes. Useful for simple cases of
     // `filter`.
     where: function(attrs, first) {
-      if (_.isEmpty(attrs)) return first ? void 0 : [];
+      if (__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].isEmpty(attrs)) return first ? void 0 : [];
       return this[first ? 'find' : 'filter'](function(model) {
         for (var key in attrs) {
           if (attrs[key] !== model.get(key)) return false;
@@ -903,10 +913,10 @@ var talentDll =
       options || (options = {});
 
       // Run sort based on type of `comparator`.
-      if (_.isString(this.comparator) || this.comparator.length === 1) {
+      if (__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].isString(this.comparator) || this.comparator.length === 1) {
         this.models = this.sortBy(this.comparator, this);
       } else {
-        this.models.sort(_.bind(this.comparator, this));
+        this.models.sort(__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].bind(this.comparator, this));
       }
 
       if (!options.silent) this.trigger('sort', this, options);
@@ -915,14 +925,14 @@ var talentDll =
 
     // Pluck an attribute from each model in the collection.
     pluck: function(attr) {
-      return _.invoke(this.models, 'get', attr);
+      return __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].invoke(this.models, 'get', attr);
     },
 
     // Fetch the default set of models for this collection, resetting the
     // collection when they arrive. If `reset: true` is passed, the response
     // data will be passed through the `reset` method instead of `set`.
     fetch: function(options) {
-      options = options ? _.clone(options) : {};
+      options = options ? __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].clone(options) : {};
       if (options.parse === void 0) options.parse = true;
       var success = options.success;
       var collection = this;
@@ -940,7 +950,7 @@ var talentDll =
     // collection immediately, unless `wait: true` is passed, in which case we
     // wait for the server to agree.
     create: function(model, options) {
-      options = options ? _.clone(options) : {};
+      options = options ? __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].clone(options) : {};
       if (!(model = this._prepareModel(model, options))) return false;
       if (!options.wait) this.add(model, options);
       var collection = this;
@@ -979,7 +989,7 @@ var talentDll =
         if (!attrs.collection) attrs.collection = this;
         return attrs;
       }
-      options = options ? _.clone(options) : {};
+      options = options ? __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].clone(options) : {};
       options.collection = this;
       var model = new this.model(attrs, options);
       if (!model.validationError) return model;
@@ -1020,11 +1030,11 @@ var talentDll =
     'lastIndexOf', 'isEmpty', 'chain'];
 
   // Mix in each Underscore method as a proxy to `Collection#models`.
-  _.each(methods, function(method) {
+  __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].each(methods, function(method) {
     Collection.prototype[method] = function() {
       var args = slice.call(arguments);
       args.unshift(this.models);
-      return _[method].apply(_, args);
+      return __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"][method].apply(__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"], args);
     };
   });
 
@@ -1032,12 +1042,12 @@ var talentDll =
   var attributeMethods = ['groupBy', 'countBy', 'sortBy'];
 
   // Use attributes instead of properties.
-  _.each(attributeMethods, function(method) {
+  __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].each(attributeMethods, function(method) {
     Collection.prototype[method] = function(value, context) {
-      var iterator = _.isFunction(value) ? value : function(model) {
+      var iterator = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].isFunction(value) ? value : function(model) {
         return model.get(value);
       };
-      return _[method](this.models, iterator, context);
+      return __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"][method](this.models, iterator, context);
     };
   });
 
@@ -1055,9 +1065,9 @@ var talentDll =
   // Creating a Backbone.View creates its initial element outside of the DOM,
   // if an existing element is not provided...
   var View = Backbone.View = function(options) {
-    this.cid = _.uniqueId('view');
+    this.cid = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].uniqueId('view');
     options || (options = {});
-    _.extend(this, _.pick(options, viewOptions));
+    __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend(this, __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].pick(options, viewOptions));
     this._ensureElement();
     this.initialize.apply(this, arguments);
     this.delegateEvents();
@@ -1070,7 +1080,7 @@ var talentDll =
   var viewOptions = ['model', 'collection', 'el', 'id', 'attributes', 'className', 'tagName', 'events'];
 
   // Set up all inheritable **Backbone.View** properties and methods.
-  _.extend(View.prototype, Events, {
+  __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend(View.prototype, Events, {
 
     // The default `tagName` of a View's element is `"div"`.
     tagName: 'div',
@@ -1126,16 +1136,16 @@ var talentDll =
     // This only works for delegate-able events: not `focus`, `blur`, and
     // not `change`, `submit`, and `reset` in Internet Explorer.
     delegateEvents: function(events) {
-      if (!(events || (events = _.result(this, 'events')))) return this;
+      if (!(events || (events = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].result(this, 'events')))) return this;
       this.undelegateEvents();
       for (var key in events) {
         var method = events[key];
-        if (!_.isFunction(method)) method = this[events[key]];
+        if (!__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].isFunction(method)) method = this[events[key]];
         if (!method) continue;
 
         var match = key.match(delegateEventSplitter);
         var eventName = match[1], selector = match[2];
-        method = _.bind(method, this);
+        method = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].bind(method, this);
         eventName += '.delegateEvents' + this.cid;
         if (selector === '') {
           this.$el.on(eventName, method);
@@ -1160,13 +1170,13 @@ var talentDll =
     // an element from the `id`, `className` and `tagName` properties.
     _ensureElement: function() {
       if (!this.el) {
-        var attrs = _.extend({}, _.result(this, 'attributes'));
-        if (this.id) attrs.id = _.result(this, 'id');
-        if (this.className) attrs['class'] = _.result(this, 'className');
-        var $el = Backbone.$('<' + _.result(this, 'tagName') + '>').attr(attrs);
+        var attrs = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend({}, __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].result(this, 'attributes'));
+        if (this.id) attrs.id = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].result(this, 'id');
+        if (this.className) attrs['class'] = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].result(this, 'className');
+        var $el = Backbone.$('<' + __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].result(this, 'tagName') + '>').attr(attrs);
         this.setElement($el, false);
       } else {
-        this.setElement(_.result(this, 'el'), false);
+        this.setElement(__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].result(this, 'el'), false);
       }
     }
 
@@ -1194,7 +1204,7 @@ var talentDll =
     var type = methodMap[method];
 
     // Default options, unless specified.
-    _.defaults(options || (options = {}), {
+    __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].defaults(options || (options = {}), {
       emulateHTTP: Backbone.emulateHTTP,
       emulateJSON: Backbone.emulateJSON
     });
@@ -1204,7 +1214,7 @@ var talentDll =
 
     // Ensure that we have a URL.
     if (!options.url) {
-      params.url = _.result(model, 'url') || urlError();
+      params.url = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].result(model, 'url') || urlError();
     }
 
     // Ensure that we have the appropriate request data.
@@ -1246,7 +1256,7 @@ var talentDll =
     }
 
     // Make the request, allowing the user to override any Ajax options.
-    var xhr = options.xhr = Backbone.ajax(_.extend(params, options));
+    var xhr = options.xhr = Backbone.ajax(__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend(params, options));
     model.trigger('request', model, xhr, options);
     return xhr;
   };
@@ -1288,7 +1298,7 @@ var talentDll =
   var escapeRegExp  = /[\-{}\[\]+?.,\\\^$|#\s]/g;
 
   // Set up all inheritable **Backbone.Router** properties and methods.
-  _.extend(Router.prototype, Events, {
+  __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend(Router.prototype, Events, {
 
     // Initialize is an empty function by default. Override it with your own
     // initialization logic.
@@ -1301,8 +1311,8 @@ var talentDll =
     //     });
     //
     route: function(route, name, callback) {
-      if (!_.isRegExp(route)) route = this._routeToRegExp(route);
-      if (_.isFunction(name)) {
+      if (!__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].isRegExp(route)) route = this._routeToRegExp(route);
+      if (__WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].isFunction(name)) {
         callback = name;
         name = '';
       }
@@ -1329,8 +1339,8 @@ var talentDll =
     // routes can be defined at the bottom of the route map.
     _bindRoutes: function() {
       if (!this.routes) return;
-      this.routes = _.result(this, 'routes');
-      var route, routes = _.keys(this.routes);
+      this.routes = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].result(this, 'routes');
+      var route, routes = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].keys(this.routes);
       while ((route = routes.pop()) != null) {
         this.route(route, this.routes[route]);
       }
@@ -1353,7 +1363,7 @@ var talentDll =
     // treated as `null` to normalize cross-browser behavior.
     _extractParameters: function(route, fragment) {
       var params = route.exec(fragment).slice(1);
-      return _.map(params, function(param) {
+      return __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].map(params, function(param) {
         return param ? decodeURIComponent(param) : null;
       });
     }
@@ -1370,7 +1380,7 @@ var talentDll =
   // falls back to polling.
   var History = Backbone.History = function() {
     this.handlers = [];
-    _.bindAll(this, 'checkUrl');
+    __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].bindAll(this, 'checkUrl');
 
     // Ensure that `History` can be used outside of the browser.
     if (typeof window !== 'undefined') {
@@ -1398,7 +1408,7 @@ var talentDll =
   History.started = false;
 
   // Set up all inheritable **Backbone.History** properties and methods.
-  _.extend(History.prototype, Events, {
+  __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend(History.prototype, Events, {
 
     // The default interval to poll for hash changes, if necessary, is
     // twenty times a second.
@@ -1434,7 +1444,7 @@ var talentDll =
 
       // Figure out the initial configuration. Do we need an iframe?
       // Is pushState desired ... is it available?
-      this.options          = _.extend({root: '/'}, this.options, options);
+      this.options          = __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend({root: '/'}, this.options, options);
       this.root             = this.options.root;
       this._wantsHashChange = this.options.hashChange !== false;
       this._wantsPushState  = !!this.options.pushState;
@@ -1522,7 +1532,7 @@ var talentDll =
     // returns `false`.
     loadUrl: function(fragment) {
       fragment = this.fragment = this.getFragment(fragment);
-      return _.any(this.handlers, function(handler) {
+      return __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].any(this.handlers, function(handler) {
         if (handler.route.test(fragment)) {
           handler.callback(fragment);
           return true;
@@ -1606,14 +1616,14 @@ var talentDll =
     // The constructor function for the new subclass is either defined by you
     // (the "constructor" property in your `extend` definition), or defaulted
     // by us to simply call the parent's constructor.
-    if (protoProps && _.has(protoProps, 'constructor')) {
+    if (protoProps && __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].has(protoProps, 'constructor')) {
       child = protoProps.constructor;
     } else {
       child = function(){ return parent.apply(this, arguments); };
     }
 
     // Add static properties to the constructor function, if supplied.
-    _.extend(child, parent, staticProps);
+    __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend(child, parent, staticProps);
 
     // Set the prototype chain to inherit from `parent`, without calling
     // `parent`'s constructor function.
@@ -1623,7 +1633,7 @@ var talentDll =
 
     // Add prototype properties (instance properties) to the subclass,
     // if supplied.
-    if (protoProps) _.extend(child.prototype, protoProps);
+    if (protoProps) __WEBPACK_IMPORTED_MODULE_0__beisen_lodash__["default"].extend(child.prototype, protoProps);
 
     // Set a convenience property in case the parent's prototype is needed
     // later.
@@ -1649,7 +1659,7 @@ var talentDll =
     };
   };
 
-}).call(this);
+/* harmony default export */ __webpack_exports__["default"] = (Backbone);
 
 
 /***/ }),
@@ -16810,6 +16820,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       };
     });
 
+
  /* harmony default export */ __webpack_exports__["default"] = (lodash);
 
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/webpack/buildin/harmony-module.js")(module), __webpack_require__("./node_modules/webpack/buildin/global.js")))
@@ -19214,8 +19225,7 @@ _.extend(Marionette.Module, {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__ = __webpack_require__("./node_modules/@beisen/backbone/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__beisen_backbone__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__ = __webpack_require__("./node_modules/@beisen/backbone/index-es6.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__beisen_marionette__ = __webpack_require__("./node_modules/@beisen/marionette/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__beisen_marionette___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__beisen_marionette__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__beisen_lodash__ = __webpack_require__("./node_modules/@beisen/lodash/index-es6.js");
@@ -19236,7 +19246,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	var Talent = {};
 
 	// Get the DOM manipulator for later use
-	Talent.$ = __WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.$;
+	Talent.$ = __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].$;
 	Talent._ = __WEBPACK_IMPORTED_MODULE_2__beisen_lodash__["default"];
 
 	/**
@@ -19244,12 +19254,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	 * support forceTrigge;
 	 * encode fragment after location hash ;
 	 */
-	__WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.History.prototype.navigate = function(fragment, options) {
+	__WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].History.prototype.navigate = function(fragment, options) {
 		if(this.iframe && !this.setIframe) {
 			this.iframe = window;
 			this.setIframe = true;
 		}
-		if (!__WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.History.started) return false;
+		if (!__WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].History.started) return false;
 		if (!options || options === true) options = {trigger: options};
 		fragment = encodeURIComponent(this.getFragment(fragment || '')); 
 		if ((this.fragment === fragment) && !options.forceTrigger) return;
@@ -19317,7 +19327,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	 * @class BaseRouter
 	 * @version 0.2 abstract methods:
 	 */
-	Talent.BaseRouter = __WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.Router.extend(
+	Talent.BaseRouter = __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Router.extend(
 		/** @lends BaseRouter.'[prototype]' */
 	{
 		/**
@@ -19326,8 +19336,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		 */
 		loadPageView: function() {
 			// redirect to page of entryPageId if history fragment is empty
-			if(!__WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.history.getFragment()){
-				return __WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.history.navigate(this.options.entryPageId, true);
+			if(!__WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].history.getFragment()){
+				return __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].history.navigate(this.options.entryPageId, true);
 			}
 			var self = this;
 			var fullPageViewPath = this.getPageViewPath();
@@ -19381,7 +19391,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		 * @return {Array} fragment array
 		 */
 		getFragments: function() {
-			var fragmentStr = decodeURIComponent(__WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.history.getFragment() || '');
+			var fragmentStr = decodeURIComponent(__WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].history.getFragment() || '');
 			var fragments = [];
 			var markIndex = fragmentStr.indexOf("?");
 	
@@ -19404,7 +19414,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		 */
 		getQueryObject: function() {
 			// get page location from variable if history fragment is empty
-			var fragmentStr = decodeURIComponent(__WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.history.getFragment() || '');
+			var fragmentStr = decodeURIComponent(__WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].history.getFragment() || '');
 			var queryObject = {};
 			var markIndex = fragmentStr.indexOf("?");
 	
@@ -19533,7 +19543,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	});
 	// 
-	Talent.app =  new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.Marionette.Application();
+	Talent.app =  new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Marionette.Application();
 	// Regular expression used to split event strings.
 	var eventSplitter = /\s+/;
 	var multiEventSplitter = /\.+/;
@@ -19682,7 +19692,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	
 	
 	Talent.app.commands.setHandler('history:navigate', function( href, triggerFlag ){
-		__WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.history.navigate(href, triggerFlag);
+		__WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].history.navigate(href, triggerFlag);
 	});
 	
 	Talent.app.commands.setHandler('document:changePageTitle', function(title){
@@ -19726,8 +19736,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	});
 	
 	Talent.app.on("initialize:after", function(options){
-		if (__WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.history){
-			__WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.history.start(options);
+		if (__WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].history){
+			__WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].history.start(options);
 			delegateLinkClick();
 		}
 	
@@ -19745,7 +19755,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				 * trigger the correct events. The Router's internal `navigate` method
 				 * calls this anyways.  The fragment is sliced from the root.
 				 */
-				__WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.history.navigate(href, options);
+				__WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].history.navigate(href, options);
 			}, 300, true);
 			__WEBPACK_IMPORTED_MODULE_3__beisen_jquery__(document).on('click', 'a:not([data-bypass])', function(e){
 					/**
@@ -19776,35 +19786,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	Talent.Layout = Marionette.Layout.extend({
 		constructor : function() {
-			this.model || (this.model = new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.Model);
+			this.model || (this.model = new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Model);
 			Marionette.Layout.prototype.constructor.apply(this,arguments);
 		}
 	});
 	Talent.CompositeView = Marionette.CompositeView.extend({
 		constructor : function() {
-			this.collection || (this.collection = new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.Collection);
-			this.model || (this.model = new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.Model);
+			this.collection || (this.collection = new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Collection);
+			this.model || (this.model = new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Model);
 			Marionette.CompositeView.prototype.constructor.apply(this,arguments);
 		}
 	});
 	Talent.CollectionView = Marionette.CollectionView.extend({
 		constructor : function() {
-			this.collection || (this.collection = new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.Collection);
+			this.collection || (this.collection = new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Collection);
 			Marionette.CollectionView.prototype.constructor.apply(this,arguments);
 		}
 	});
 	Talent.ItemView = Marionette.ItemView.extend({
 		constructor : function() {
-			this.model || (this.model = new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.Model);			
+			this.model || (this.model = new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Model);			
 			Marionette.ItemView.prototype.constructor.apply(this,arguments);
 		}
 	});
 	
-	Talent.Model = __WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.Model;
-	Talent.Collection = __WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.Collection;
+	Talent.Model = __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Model;
+	Talent.Collection = __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Collection;
 	Talent.View = Marionette.View;
 
-	Talent.Router = __WEBPACK_IMPORTED_MODULE_0__beisen_backbone___default.a.Router;
+	Talent.Router = __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Router;
 	Talent.Region = Marionette.Region;
 	
 	/* harmony default export */ __webpack_exports__["default"] = (Talent);
