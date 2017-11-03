@@ -19,7 +19,7 @@
     "@beisen/jquery": "^1.10.5",
     "@beisen/json": "^3.5.29",
     "@beisen/lodash": "^2.2.5",
-    "@beisen/marionette": "^1.2.2",
+    "@beisen/marionette": "^1.2.6",
     "@beisen/talent-no-require": "^1.0.6"
   },
   "scripts": {

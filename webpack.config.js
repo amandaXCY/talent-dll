@@ -32,7 +32,7 @@ module.exports = (options = {}) => {
         //         NODE_ENV: JSON.stringify(isProduction ? prod : dev)
         //     }
         // }),
-        // // new webpack.optimize.ModuleConcatenationPlugin(),
+        new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.ProvidePlugin({
             $: 'jQuery',
             jQuery:"jQuery",
@@ -74,18 +74,25 @@ module.exports = (options = {}) => {
         },
         plugins: plugins,
         resolve: {
-            modules: ['node_modules']
+            modules: ['node_modules'],
+            alias:{
+                xyz$: path.resolve(__dirname, 'path/to/file.js')
+            }
         },
         module:{
             rules: [{
                 test: /\.js?$/,
                 include: [path.resolve(process.cwd(), "./node_modules/@beisen/jquery/index.js")],
+                
                 use: [{
                   loader: 'expose-loader',
                   options: 'jquery'
                 },{
                   loader: 'expose-loader',
                   options: '$'
+                },{
+                  loader: 'expose-loader',
+                  options: '_'
                 }]
             }]
         },
