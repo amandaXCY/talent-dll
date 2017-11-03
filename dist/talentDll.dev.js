@@ -108,12 +108,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   // The top-level namespace. All public Backbone classes and modules will
   // be attached to this. Exported for both the browser and the server.
-  // var Backbone;
-  // if (typeof exports !== 'undefined') {
-  //   Backbone = exports;
-  // } else {
-  //   Backbone = root.Backbone = {};
-  // }
+  var Backbone;
+  if (typeof exports !== 'undefined') {
+    Backbone = exports;
+  } else {
+    Backbone = root.Backbone = {};
+  }
 
   // Current version of the library. Keep in sync with `package.json`.
   Backbone.VERSION = '1.1.0';
