@@ -19304,7 +19304,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	
 
 	//version 0.3.2-8
-	var Marionette = Marionette;
 
 	// Define and export the Talent namespace
 	var Talent = {};
@@ -19354,7 +19353,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		if (options.trigger) this.loadUrl(fragment);
 	};
 	// bugfix: find missing events by re-delegating
-	Marionette.Region.prototype.show = function(view, options){
+	__WEBPACK_IMPORTED_MODULE_1__beisen_marionette__["default"].Region.prototype.show = function(view, options){
 		this.ensureEl();
 		options = options || {};
 		if (view !== this.currentView) {
@@ -19375,8 +19374,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		} else {
 			view.render();
 		}
-		Marionette.triggerMethod.call(view, "show");
-		Marionette.triggerMethod.call(this, "show", view);
+		__WEBPACK_IMPORTED_MODULE_1__beisen_marionette__["default"].triggerMethod.call(view, "show");
+		__WEBPACK_IMPORTED_MODULE_1__beisen_marionette__["default"].triggerMethod.call(this, "show", view);
 	
 		this.currentView = view;
 		if(options.noAnimate) {
@@ -19518,7 +19517,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	});
 	
-	Talent.BaseMasterLayout = Marionette.Layout.extend({
+	Talent.BaseMasterLayout = __WEBPACK_IMPORTED_MODULE_1__beisen_marionette__["default"].Layout.extend({
 		template: __WEBPACK_IMPORTED_MODULE_2__beisen_lodash__["default"].template([
 				'<div id="header-region"></div>',
 				'<div class="row">',
@@ -19561,7 +19560,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.SidebarViewClass = null;
 		}
 	});
-	Talent.BaseEmptyLayout = Marionette.Layout.extend({
+	Talent.BaseEmptyLayout = __WEBPACK_IMPORTED_MODULE_1__beisen_marionette__["default"].Layout.extend({
 		template: __WEBPACK_IMPORTED_MODULE_2__beisen_lodash__["default"].template('<div id="main-region"></div>'),
 		regions:{
 			main: '#main-region'
@@ -19574,7 +19573,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.refresh();
 		}
 	});
-	Talent.BasePageView = Marionette.Layout.extend({
+	Talent.BasePageView = __WEBPACK_IMPORTED_MODULE_1__beisen_marionette__["default"].Layout.extend({
 		layout: 'master-layout'
 		,onLayoutRender: function() {
 			
@@ -19848,38 +19847,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	});
 
-	Talent.Layout = Marionette.Layout.extend({
+	Talent.Layout = __WEBPACK_IMPORTED_MODULE_1__beisen_marionette__["default"].Layout.extend({
 		constructor : function() {
 			this.model || (this.model = new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Model);
-			Marionette.Layout.prototype.constructor.apply(this,arguments);
+			__WEBPACK_IMPORTED_MODULE_1__beisen_marionette__["default"].Layout.prototype.constructor.apply(this,arguments);
 		}
 	});
-	Talent.CompositeView = Marionette.CompositeView.extend({
+	Talent.CompositeView = __WEBPACK_IMPORTED_MODULE_1__beisen_marionette__["default"].CompositeView.extend({
 		constructor : function() {
 			this.collection || (this.collection = new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Collection);
 			this.model || (this.model = new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Model);
-			Marionette.CompositeView.prototype.constructor.apply(this,arguments);
+			__WEBPACK_IMPORTED_MODULE_1__beisen_marionette__["default"].CompositeView.prototype.constructor.apply(this,arguments);
 		}
 	});
-	Talent.CollectionView = Marionette.CollectionView.extend({
+	Talent.CollectionView = __WEBPACK_IMPORTED_MODULE_1__beisen_marionette__["default"].CollectionView.extend({
 		constructor : function() {
 			this.collection || (this.collection = new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Collection);
-			Marionette.CollectionView.prototype.constructor.apply(this,arguments);
+			__WEBPACK_IMPORTED_MODULE_1__beisen_marionette__["default"].CollectionView.prototype.constructor.apply(this,arguments);
 		}
 	});
-	Talent.ItemView = Marionette.ItemView.extend({
+	Talent.ItemView = __WEBPACK_IMPORTED_MODULE_1__beisen_marionette__["default"].ItemView.extend({
 		constructor : function() {
 			this.model || (this.model = new __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Model);			
-			Marionette.ItemView.prototype.constructor.apply(this,arguments);
+			__WEBPACK_IMPORTED_MODULE_1__beisen_marionette__["default"].ItemView.prototype.constructor.apply(this,arguments);
 		}
 	});
 	
 	Talent.Model = __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Model;
 	Talent.Collection = __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Collection;
-	Talent.View = Marionette.View;
+	Talent.View = __WEBPACK_IMPORTED_MODULE_1__beisen_marionette__["default"].View;
 
 	Talent.Router = __WEBPACK_IMPORTED_MODULE_0__beisen_backbone__["default"].Router;
-	Talent.Region = Marionette.Region;
+	Talent.Region = __WEBPACK_IMPORTED_MODULE_1__beisen_marionette__["default"].Region;
 	
 	/* harmony default export */ __webpack_exports__["default"] = (Talent);
 

@@ -1,6 +1,6 @@
 {
   "name": "@amanda/talent-dll",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "dist/talent.dev.js",
   "author": {
     "name": "xuchengyun",
@@ -20,7 +20,7 @@
     "@beisen/json": "^3.5.29",
     "@beisen/lodash": "^2.2.5",
     "@beisen/marionette": "^1.2.6",
-    "@beisen/talent-no-require": "^1.0.6"
+    "@beisen/talent-no-require": "^1.0.7"
   },
   "scripts": {
     "test": "jest",
